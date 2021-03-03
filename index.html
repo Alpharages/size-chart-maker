@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Tracking System</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing: antialiased;
+      -o-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      font-family: "Roboto", Helvetica, Arial, sans-serif;
+      font-weight: 100;
+      font-size: 12px;
+      line-height: 30px;
+      color: #777;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    #contact {
+      background: #F9F9F9;
+      padding: 25px;
+      margin: 150px 0;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    #contact h3 {
+      display: block;
+      font-size: 30px;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    #contact h4 {
+      margin: 5px 0 15px;
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    fieldset {
+      border: medium none !important;
+      margin: 0 0 10px;
+      min-width: 100%;
+      padding: 0;
+      width: 100%;
+    }
+
+    #contact input[type="text"] {
+      height: 44px;
+      width: 100%;
+      border: 1px solid #ccc;
+      background: #FFF;
+      margin: 0 0 5px;
+      padding: 10px;
+    }
+
+    #contact input[type="text"]:hover:hover {
+      -webkit-transition: border-color 0.3s ease-in-out;
+      -moz-transition: border-color 0.3s ease-in-out;
+      transition: border-color 0.3s ease-in-out;
+      border: 1px solid #aaa;
+    }
+
+    #generate {
+      cursor: pointer;
+      width: 100%;
+      border: none;
+      background: #4CAF50;
+      color: #FFF;
+      margin: 0 0 5px;
+      padding: 10px;
+      font-size: 15px;
+    }
+
+    #generate:hover {
+      background: #43A047;
+      -webkit-transition: background 0.3s ease-in-out;
+      -moz-transition: background 0.3s ease-in-out;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    #generate:active {
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .copyright {
+      text-align: center;
+    }
+
+    #contact input:focus{
+      outline: 0;
+      border: 1px solid #aaa;
+    }
+
+    ::-webkit-input-placeholder {
+      color: #888;
+    }
+
+    :-moz-placeholder {
+      color: #888;
+    }
+
+    ::-moz-placeholder {
+      color: #888;
+    }
+
+    :-ms-input-placeholder {
+      color: #888;
+    }
+
+    .row {
+      width: 70% !important;
+      border-radius: 4px;
+      color: inherit;
+      display: inline-block;
+      line-height: normal;
+      margin-bottom: 0.75em;
+      padding: 12px 10px 10px;
+      vertical-align: middle;
+      border: 1px solid #ccc;
+    }
+
+    .nba-btn {
+      border: none;
+      height: 44px;
+      background-color: #0ed085;
+      color: #fff;
+      margin: -1px;
+      border-radius: 0;
+      width: 135px;
+      text-transform: uppercase;
+      position: relative;
+      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.3s;
+      -moz-transition: all ease 0.3s;
+      -o-transition: all ease 0.3s;
+      -ms-transition: all ease 0.3s;
+    }
+    .nba-btn:hover, .nba-btn:focus, .nba-btn:active, .nba-btn:visited {
+      color: #fff;
+      background-color: rgba(14, 208, 133, 0.77);
+      outline: none;
+      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.3s;
+      -moz-transition: all ease 0.3s;
+      -o-transition: all ease 0.3s;
+      -ms-transition: all ease 0.3s;
+    }
+    .nba-btn:hover:before, .nba-btn:focus:before, .nba-btn:active:before, .nba-btn:visited:before {
+      background-color: rgba(14, 208, 133, 0.77);
+      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.3s;
+      -moz-transition: all ease 0.3s;
+      -o-transition: all ease 0.3s;
+      -ms-transition: all ease 0.3s;
+    }
+    .nba-btn:before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 1px;
+      background-color: #0ed085;
+      width: 100%;
+      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.3s;
+      -moz-transition: all ease 0.3s;
+      -o-transition: all ease 0.3s;
+      -ms-transition: all ease 0.3s;
+    }
+    .input-group-btn:last-child > .btn, .subscribe_form .input-group-btn:last-child > .btn-group {
+      z-index: 2;
+      margin-left: 0px;
+    }
+
+    table {
+      width: 750px;
+      border-collapse: collapse;
+      margin:20px auto;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    td, th {
+      background: #ffffff;
+      color: #777;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #000000;
+      font-size: 18px;
+    }
+
+    /*
+    Max width before this PARTICULAR table gets nasty
+    This query will take effect for any screen smaller than 760px
+    and also iPads specifically.
+    */
+    @media
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+      table {
+        width: 100%;
+      }
+
+      /* Force table to not be like tables anymore */
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr { border: 1px solid #000000; }
+
+      td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #000000;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        /* Label the data */
+        content: attr(data-column);
+
+        color: #000;
+        font-weight: bold;
+      }
+
+    }
+  </style>
+  <script>
+    $(() => {
+      $('#add_button').click(function () {
+        const fieldHTML = '<fieldset>\n' +
+                '      <input placeholder="Row (Multi row value should be , separated)" type="text" class="row">\n' +
+                '      <span class="input-group-btn">\n' +
+                '        <button class="btn btn-default nba-btn remove_button" type="button">Remove</button>\n' +
+                '      </span>\n' +
+                '    </fieldset>';
+        $('.field_wrapper').append(fieldHTML); //Add field html
+      });
+
+      $('.field_wrapper').on('click', '.remove_button', (e) => {
+        $(e.target).parents('fieldset').remove(); //Remove field html
+      });
+
+      $('#generate').click((e) => {
+        const chartTitle = $('#chart_title').val();
+        let columns = $('#column_header').val();
+        columns = columns.split(',')
+        let headHtml = '<tr>'
+        let rowHtml = ''
+        columns.map((v) => {
+          headHtml += '<th>' + v + '</th>'
+        })
+        headHtml += '</tr>'
+        $('.row').map((k, v) => {
+          rowHtml += '<tr>'
+          v = $(v).val();
+          v = v.split(',')
+          v.map((v) => {
+            rowHtml += '<td>' + v + '</td>'
+          })
+          rowHtml += '</tr>'
+        })
+        $('#display-chart-name').text(chartTitle);
+        $('#head').html(headHtml);
+        $('#rows').html(rowHtml);
+        $('#chart').show();
+        html2canvas(document.getElementById("chart"), {scale:1}).then(canvas => {
+          const image = canvas.toDataURL("image/png");
+          let a = document.createElement('a');
+          var pHtml = "<img src="+image+" />";
+          $("#parent").html(pHtml);
+          a.download = chartTitle + ".png";
+          a.href =  image;
+          a.click();
+          $('#chart').hide();
+        });
+      })
+    })
+  </script>
+</head>
+<body class="navbar-md-md-top">
+<div id="chart" style="max-width: 1200px; display: none">
+  <div style="text-align: center" >
+    <h1 id="display-chart-name"></h1>
+  </div>
+  <table>
+    <thead id="head"></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+<div class="container">
+  <div id="contact">
+    <h3 style="text-align: center">Size Chart</h3>
+    <h4></h4>
+    <fieldset>
+      <input placeholder="Chart Name" type="text" id="chart_title" value="site">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Column (Multi column value should be , separated)" type="text" required id="column_header" value="column_1,column_2">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Row (Multi row value should be , separated)" type="text" class="row" value="row_1,row_2">
+      <span class="input-group-btn">
+        <button class="btn btn-default nba-btn" type="button" id="add_button">Add more</button>
+      </span>
+    </fieldset>
+    <div class="field_wrapper"></div>
+    <fieldset>
+      <button type="button" id="generate">Generate</button>
+    </fieldset>
+  </div>
+</div>
+</body>
